@@ -3,35 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmader <jmader@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbmader <jbmader@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:59:51 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/19 15:13:27 by jmader           ###   ########.fr       */
+/*   Updated: 2024/11/22 19:12:36 by jbmader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
 #include "get_next_line.h"
+
+int	build_line(char **line, char *buf)
+{
+	int		i;
+	char	*tmp;
+	char	*substr;
+
+	i = 0;
+	tmp = *line;
+	while (buf[i] != '\0')
+	{
+		if (buf[i] == '\n')
+		{
+			substr = ft_substr(buf, 0, i);
+			*line = ft_strjoin(*line, substr);
+			free(substr);
+			free(tmp);
+			return (1);
+		}
+		i++;
+	}
+	substr = ft_substr(buf, 0, i);
+	*line = ft_strjoin(*line, substr);
+	free(substr);
+	free(tmp);
+	return (0);
+}
 
 char	*get_next_line(int fd)
 {
-	char			*buf[BUFFER_SIZE + 1];
-	char			*line;
-	static int		nb_read;
-	int				count;
+	static char	buf[BUFFER_SIZE + 1];
+	char		*line;
+	int			nb_read;
 
+	line = malloc(1);
+	if (!line)
+		return (NULL);
+	line[0] = '\0';
 	nb_read = -1;
-	count = 0;
-	if (nb_read != 0)
+	while (nb_read != 0)
 	{
 		nb_read = read(fd, buf, BUFFER_SIZE);
 		if (nb_read == -1)
 		{
-			printf("Read error!\n");
-			return (1);
+			free(line);
+			return (NULL);
 		}
-		buf[nb_read] = '\0';
-		// Print the buffer contents after read
-		printf("\e[36m%d : [\e[0m%s\e[36m]\e[0m\n", count, buf);
-		count++;
+		if (nb_read > 0)
+			buf[nb_read] = '\0';
+		if (build_line(&line, buf) == 1)
+			return (line);
 	}
+	if (line[0] != '\0')
+		return (line);
+	free(line);
+	return (NULL);
 }
