@@ -6,7 +6,7 @@
 /*   By: jbmader <jbmader@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:57:14 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/22 17:30:58 by jbmader          ###   ########.fr       */
+/*   Updated: 2024/11/26 23:27:58 by jbmader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strchr(const char *s, int c);
 char	*get_next_line(int fd);
 
 #endif

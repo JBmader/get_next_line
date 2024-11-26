@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmader <jmader@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbmader <jbmader@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:00:33 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/26 20:36:33 by jmader           ###   ########.fr       */
+/*   Updated: 2024/11/26 23:26:12 by jbmader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,46 +60,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*dest;
-	int		i;
+	int	i;
 
 	i = 0;
-	dest = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
-	if (dest == NULL)
-		return (NULL);
-	while (src[i])
+	while (s[i])
 	{
-		dest[i] = src[i];
+		if ((unsigned char)s[i] == (char)c)
+			return ((char *)&s[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	size_t	slen;
-	char	*str;
-
-	if (!s)
-		return (NULL);
-	slen = ft_strlen(s);
-	if (start >= slen)
-		return (ft_strdup(""));
-	if (start + len > slen)
-		len = slen - start;
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < len && s[start + i] != '\0')
-	{
-		str[i] = s[start + i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	if ((unsigned char)c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
 }
