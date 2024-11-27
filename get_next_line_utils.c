@@ -6,7 +6,7 @@
 /*   By: jmader <jmader@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:00:33 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/27 15:09:05 by jmader           ###   ########.fr       */
+/*   Updated: 2024/11/27 16:37:59 by jmader           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
@@ -30,6 +32,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	dlen;
 
 	i = 0;
+	if (!dst || !src)
+		return (0);
 	slen = ft_strlen(src);
 	dlen = ft_strlen(dst);
 	if (size <= dlen)
@@ -65,6 +69,8 @@ char	*ft_strchr(const char *s, int c)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while (s[i])
 	{
 		if ((unsigned char)s[i] == (char)c)
@@ -82,6 +88,8 @@ char	*ft_strdup(const char *src)
 	int		i;
 
 	i = 0;
+	if (!src)
+		return (NULL);
 	dest = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
 	if (dest == NULL)
 		return (NULL);

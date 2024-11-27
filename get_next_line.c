@@ -6,7 +6,7 @@
 /*   By: jmader <jmader@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:59:51 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/27 15:44:32 by jmader           ###   ########.fr       */
+/*   Updated: 2024/11/27 19:43:24 by jmader           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-char	*ft_free(char *buffer, char *buf)
+char	*ft_moove_buff(char *buffer, char *buf)
 {
 	char	*temp;
 
@@ -33,6 +33,8 @@ char	*ft_next_and_line(char **buffer, char **line)
 	int		i;
 	char	*next_buffer;
 
+	if (!buffer || !*buffer || !line)
+		return (NULL);
 	i = 0;
 	while ((*buffer)[i] && (*buffer)[i] != '\n')
 		i++;
@@ -66,8 +68,8 @@ char	*read_and_append(int fd, char *res, char *buffer)
 		if (byte_read < 0)
 			return (NULL);
 		buffer[byte_read] = '\0';
-		res = ft_free(res, buffer);
-		if (!res || ft_strchr(buffer, '\n'))
+		res = ft_moove_buff(res, buffer);
+		if ((!res) || ft_strchr(buffer, '\n'))
 			break ;
 	}
 	return (res);
@@ -78,8 +80,6 @@ char	*read_file(int fd, char *res)
 	char	*buffer;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
 	if (!res)
 	{
 		res = malloc(1);
@@ -102,10 +102,16 @@ char	*read_file(int fd, char *res)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer = {0};
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (read(fd, 0, 0) < 0)
+	{
+		free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
+	if (BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
