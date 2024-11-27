@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbmader <jbmader@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmader <jmader@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:00:33 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/26 23:26:12 by jbmader          ###   ########.fr       */
+/*   Updated: 2024/11/27 15:09:05 by jmader           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,22 @@ char	*ft_strchr(const char *s, int c)
 	if ((unsigned char)c == '\0')
 		return ((char *)&s[i]);
 	return (NULL);
+}
+
+char	*ft_strdup(const char *src)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	dest = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (dest == NULL)
+		return (NULL);
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
