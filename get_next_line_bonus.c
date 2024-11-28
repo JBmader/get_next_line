@@ -6,7 +6,7 @@
 /*   By: jmader <jmader@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 20:23:06 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/28 17:19:16 by jmader           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:33:22 by jmader           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,14 @@ char	*get_next_line(int fd)
 	static char	*buffer[1024] = {0};
 	char		*line;
 
+	if (BUFFER_SIZE <= 0 || fd > 1024)
+		return (NULL);
 	if (read(fd, 0, 0) < 0)
 	{
 		free(buffer[fd]);
 		buffer[fd] = NULL;
 		return (NULL);
 	}
-	if (BUFFER_SIZE <= 0)
-		return (NULL);
 	buffer[fd] = read_file(fd, buffer[fd]);
 	if (!buffer[fd])
 		return (NULL);
