@@ -6,13 +6,13 @@
 /*   By: jmader <jmader@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 20:23:06 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/27 20:32:38 by jmader           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:19:16 by jmader           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_moove_buff(char *buffer, char *buf)
 {
