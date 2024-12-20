@@ -2,7 +2,7 @@
 #                                VARIABLES                                    #
 # **************************************************************************** #
 
-NAME            = get_next_line.a
+NAME            = libgnl.a
 CC              = cc
 CFLAGS          = -Wall -Wextra -Werror
 AR              = ar rcs
