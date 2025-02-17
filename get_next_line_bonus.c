@@ -6,7 +6,7 @@
 /*   By: jmader <jmader@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 20:23:06 by jmader            #+#    #+#             */
-/*   Updated: 2024/11/28 17:33:22 by jmader           ###   ########.fr       */
+/*   Updated: 2025/02/17 16:28:03 by jmader           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	*read_file(int fd, char *res)
 	char	*buffer;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (free(res), NULL);
 	if (!res)
 	{
 		res = malloc(1);
